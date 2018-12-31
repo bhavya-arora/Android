@@ -59,6 +59,41 @@ public class MainActivity extends AppCompatActivity {
     *       3. In BoundService, if we want to stop the boundService we have to unBind() all the
     *       components which is connected or bind with the service so that service will automatically
     *       will shutdown.
+    *
+    *
+    * ___________________                                        _______________________
+    *|                   |                                      |                       |
+    *|    App Component  |    -------------------------->       |     Started Service   |
+    *| [Activity/Service]|    <-------------X------------       |    [Intent Service]   |
+    *|___________________|                                      |_______________________|
+    *
+    * If the Calling Component is Destroyed -> Started Service Continue to run Normally.
+    *                                       -> Until stopService or stopSelf is called.
+    *                                       -> Stops Automatically if IntentService.
+    *
+    * ___________________                                        _______________________
+    *|                   |                                      |                       |
+    *|    App Component  |    -------------------------->       |     Bound Service     |
+    *| [Activity/Service]|    <-------------------------        |                       |
+    *|___________________|                                      |_______________________|
+    *
+    * If the calling Component is Destroyed -> Bound Service is also Destroyed.
+    *
+    *   >>       STARTED SERVICE/ INTENT SERVICE VS BOUND SERVICE
+    *
+    * # Just to Accomplish Task[ Long Task ]     |  # For long standing connection
+    * # Invoked by startService()                |  # Invoked By bindService()
+    * # onBind() returns null                    |  # onBind() returns IBinder
+    *
+    * NOTE: 1. Generally we use onStart() and onStop()
+    *         - To bind or unbind the service
+    *           - So that the Bound Service is only active when Activity is Visible.
+    *
+    *       2. If you want your Activity to Bind to service even when it is not visible
+    *         - i.e Acitivty is in Paused state
+    *           - call bindService in onCreate()
+    *           - call unBind in onDestroy()
+    *
     * */
 
     BoundService mBoundService;
