@@ -3,6 +3,7 @@ package bhavya.me.boundservice.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.Log;
@@ -16,13 +17,17 @@ public class BoundService extends Service {
 
     private IBinder mBinder = new MyBinder();
     private Chronometer mChronometer;
+    final Handler h = new Handler();
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mChronometer = new Chronometer(this);
+        Log.i(TAG, "onCreate: Service is created");
+        mChronometer = new Chronometer(BoundService.this);
         mChronometer.setBase(SystemClock.elapsedRealtime());
         mChronometer.start();
+
+
     }
 
     //onStartCommand() method will call only when startService() method will call but in this case both onStartCommand() and onBind() methods will call.
@@ -51,6 +56,7 @@ public class BoundService extends Service {
 
     @Override
     public void onDestroy() {
+        Log.i(TAG, "onDestroy: service");
         super.onDestroy();
         mChronometer.stop();
     }

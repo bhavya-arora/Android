@@ -94,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
     *           - call bindService in onCreate()
     *           - call unBind in onDestroy()
     *
+    *       IMPORTANT POINT:
+    *         --- Since we are using started Service as well and started service is not bind to
+    *         the component which started the service, even the App is Destroyed service
+    *         won't stop. if we want to stop the service we want to override the onDestroy()
+    *         method of MainActivity by calling stopService() method
+    *
     * */
 
     BoundService mBoundService;
@@ -168,9 +174,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        Log.i(TAG, "onDestroy: ");
         super.onDestroy();
 
-        Log.i(TAG, "onDestroy: ");
+        //only uncomment if we want to destroy the service as well with the component which started
+        //the service. Otherwise if will continue to run even if app is destroyed.
+        /*Intent intent = new Intent(this, BoundService.class);
+        stopService(intent);*/
+
+        Log.i(TAG, "onDestroy: 1");
     }
 
     @Override
