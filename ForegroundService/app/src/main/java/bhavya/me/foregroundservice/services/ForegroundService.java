@@ -1,6 +1,9 @@
 package bhavya.me.foregroundservice.services;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.support.v4.app.NotificationCompat.Action;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -8,10 +11,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import bhavya.me.foregroundservice.MainActivity;
 import bhavya.me.foregroundservice.R;
+
+import static bhavya.me.foregroundservice.MainActivity.TAG;
 
 public class ForegroundService extends Service {
 
@@ -35,6 +41,7 @@ public class ForegroundService extends Service {
         super.onCreate();
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if(intent.getAction().equals(STARTFOREGROUND_ACTION)){
@@ -50,9 +57,10 @@ public class ForegroundService extends Service {
             Toast.makeText(this, "Next Button Clicked", Toast.LENGTH_SHORT).show();
         }
         else if (intent.getAction().equals(STOPFOREGROUND_ACTION)){
+            stopForeground(true);
             stopSelf();
         }
-        return START_STICKY;
+        return Service.START_NOT_STICKY;
     }
 
     public void showNotification(){
@@ -106,6 +114,7 @@ public class ForegroundService extends Service {
 
     @Override
     public void onDestroy() {
+        Log.i(TAG, "onDestroy: Service");
         super.onDestroy();
     }
 
