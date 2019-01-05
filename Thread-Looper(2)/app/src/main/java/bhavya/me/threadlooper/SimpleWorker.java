@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class SimpleWorker extends Thread {
 
-    private static final String TAG = "SimpleWorker";
+    public static final String TAG = "SimpleWorker";
 
     Handler mHandler;
     /*When we call start() method from any activity then Thread is started and run()

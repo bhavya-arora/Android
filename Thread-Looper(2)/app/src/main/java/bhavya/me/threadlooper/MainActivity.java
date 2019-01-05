@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +32,13 @@ public class MainActivity extends AppCompatActivity {
         * Main/UI thread will immediately Execute this Runnable and call the run() method of this
         * Runnable.
         *
+        * NOTE: If we didn't pass the getMainLooper() even then it will produce same result
+        * because we are calling and Instantiating the Handle in the MainActivity, so that it
+        * will automatically pass the Current Activity Thread(Main/UI) to the Handler, and Handler
+        * will associated with Main Thread.
+        *
         * */
+        //This is used to Post/Enqueue the Runnable task to the Main Thread.
         new Handler(getMainLooper()).postDelayed(new Runnable() {
             public void run() {
                 Message m = worker.mHandler.obtainMessage();
@@ -39,5 +46,33 @@ public class MainActivity extends AppCompatActivity {
                 worker.mHandler.sendMessage(m);
             }
         }, 300);
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //This is used to Post/Enqueue the Runnable task to the SimpleWorker, because as we can see we are giving the Looper of SimpleWorker
+        // So this is Associated with SimpleWorker Thread.
+        new Handler(worker.mHandler.getLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(SimpleWorker.TAG, "Runnale Example ");
+            }
+        });
     }
 }
+
+/*There is two Types of Messages that passed to the MessageQueue:
+*    1. Message(Object/Payload/Data only)
+*    2. Runnable(Task/ Code to execute)
+*
+* So, when we sendMessage(msg) through the Handler in the Particular Thread we have to make
+* sure that we have the handleMessage() Method which can then execute the code in the handleMessage()
+* method on the basis of the Payload we provide.
+*
+ * -> And when we give Runnable/task, so we have to provide/give Runnable through the Handler
+  * and Handler which is Associated with the Looper of particular Thread.
+  *
+  * NOTE: In the Above Example I defined both Runnable and Message, how they are executing.*/
