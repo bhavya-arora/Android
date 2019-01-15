@@ -19,7 +19,7 @@ Source:
 
 ### 3. Architecture Component:
 Source:
-1. [AAC Deep](https://android.jlelse.eu/deep-dive-inside-of-androids-viewmodel-architecture-components-e6756dc0bb11)
+1. [AAC Deep](https://medium.com/the-lair/internals-of-android-architecture-components-part-i-the-viewmodel-d893e362a0d9)
 2. [Factory Approach](https://howtodoinjava.com/design-patterns/creational/abstract-factory-pattern-in-java/)
 
 
