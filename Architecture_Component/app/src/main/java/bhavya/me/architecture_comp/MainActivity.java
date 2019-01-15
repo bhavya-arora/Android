@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     *             -> https://www.geeksforgeeks.org/abstract-factory-pattern/
     *
     * AAC SOURCE:
+    *             -> https://android.jlelse.eu/android-architecture-components-viewmodel-e74faddf5b94
+    *             -> https://developer.android.com/topic/libraries/architecture/
      *            -> https://medium.com/the-lair/internals-of-android-architecture-components-part-i-the-viewmodel-d893e362a0d9
      *            -> https://medium.com/@Viraj.Tank/android-architecture-components-viewmodel-internals-should-you-use-it-for-mvps-presenter-6bf7b770cf12
      *            -> https://android.jlelse.eu/deep-dive-inside-of-androids-viewmodel-architecture-components-e6756dc0bb11*/
