@@ -15,7 +15,17 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     //SOURCE: https://codelabs.developers.google.com/codelabs/android-room-with-a-view
-    //***************************EXPLAINED BY ME*******************************
+    /*FACTORY APPROACH SOURCE:
+    *             -> https://www.journaldev.com/1418/abstract-factory-design-pattern-in-java
+    *             -> https://www.geeksforgeeks.org/abstract-factory-pattern/
+    *
+    * AAC SOURCE:
+     *            -> https://medium.com/the-lair/internals-of-android-architecture-components-part-i-the-viewmodel-d893e362a0d9
+     *            -> https://medium.com/@Viraj.Tank/android-architecture-components-viewmodel-internals-should-you-use-it-for-mvps-presenter-6bf7b770cf12
+     *            -> https://android.jlelse.eu/deep-dive-inside-of-androids-viewmodel-architecture-components-e6756dc0bb11*/
+
+
+    //**********************************EXPLAINED BY ME*******************************
 
     private static final String TAG = "MainActivity";
 
@@ -40,13 +50,16 @@ public class MainActivity extends AppCompatActivity {
         *      @Factory
         *
         * -> Now ViewModelProvider has both the parameters on which it's dependent on.
-        * @ViewModelStore: Associated with given context and it's functionality is
-        * to store ViewModel with the help of HashMap.
-        * @Factory: If ViewModelStore doesn't have existing ViewModel then ViewModelProvider
-        * use Factory to create ViewModel by calling create() method of Factory(that's where
-        * logic exist of creation of ViewModel).
         *
-        * You may be Wondering what's the Factory?
+        *      @ViewModelStore: Associated with given context and it's functionality is
+        *      to store ViewModel with the help of HashMap.
+        *
+        *      @Factory: If ViewModelStore doesn't have existing ViewModel then ViewModelProvider
+        *      use Factory to create ViewModel by calling create() method of Factory(that's where
+        *      logic exist of creation of ViewModel).
+        *
+        * Question: You may be Wondering what's the Factory?
+        *
         * -> Creating of ViewModelProvider and ViewModel has done by "Creational" design pattern,
         * and Factory object creation approach they used. For abstraction.
         *
@@ -57,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         *
         * -> Just Look inside the method "of(this)":
         *
+        *       ""
         *       public static ViewModelProvider of(@NonNull FragmentActivity activity,
         *       @Nullable Factory factory) {
         *            if (factory == null) {
@@ -64,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         *            }
         *            return new ViewModelProvider(ViewModelStores.of(activity), factory);
         *       }
+        *
+        *       ""
         *
         *       -> It's the Implementation if look caefully then we can notice that Factory is Mandatory,
         *       if we pass our custom Factory then it will be good and if not then it will use
