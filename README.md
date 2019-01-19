@@ -20,7 +20,14 @@ Source:
 ### 3. Architecture Component:
 Source:
 1. [AAC Deep](https://medium.com/the-lair/internals-of-android-architecture-components-part-i-the-viewmodel-d893e362a0d9)
-2. [Factory Approach](https://howtodoinjava.com/design-patterns/creational/abstract-factory-pattern-in-java/)
+2. [Factory Approach](https://howtodoinjava.com/design-patterns/creational/abstract-factory-pattern-in-java/)  
+
+### 4. FragmentExample:
+Source:
+1. [Fragment Explaination(Best)](https://developer.android.com/guide/components/fragments)  
+2. [Screen Compatibility](https://developer.android.com/training/multiscreen/screendensities)  
+
+***  
 
 
-> NOTE: I will add more Samples with full Explaination.
+> NOTE: I will add more Samples with full Explaination.  
